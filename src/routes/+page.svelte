@@ -148,8 +148,8 @@
   );
 
   $: dailyItems = [
-    { label: "Produced (Solar)", value: `${formatEnergy(daily.produced)} kWh` },
-    { label: "Consumed (Solar)", value: `${formatEnergy(daily.consumed)} kWh` },
+    { label: "Produced", value: `${formatEnergy(daily.produced)} kWh` },
+    { label: "Consumed", value: `${formatEnergy(daily.consumed)} kWh` },
     { label: "Exported", value: `${formatEnergy(daily.exported)} kWh` }
   ];
 </script>
@@ -181,9 +181,9 @@
             <div class="flex items-center justify-between gap-4">
               <div class="flex flex-col gap-0.5">
                 <p class="text-4xl font-semibold leading-tight tracking-tight tabular-nums drop-shadow-sm">{weather.temperature}°F</p>
-                <p class="text-sm text-slate-200">{weather.description}</p>
+                <p class="text-base text-slate-200">{weather.description}</p>
               </div>
-              <div class="flex flex-col items-end gap-0.5 text-[11px] uppercase tracking-[0.18em] text-slate-300">
+              <div class="flex flex-col items-start gap-0.5 text-xs uppercase tracking-[0.2em] text-slate-200">
                 <p>Wind {formatWind(weather.wind)}</p>
                 <p>Rain {formatRain(weather.rain)}</p>
               </div>
@@ -194,22 +194,22 @@
 
       <article class="flex items-center justify-center rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-white/0 px-6 py-4 text-center shadow-[0_24px_60px_rgba(0,0,0,0.5)] backdrop-blur">
         <div> 
-          <p class="text-2xl font-semibold tracking-tight text-slate-100">Solar</p>
-          <p class="text-xs uppercase tracking-[0.32em] text-slate-300">Dashboard</p>
+          <p class="text-3xl font-semibold tracking-tight text-slate-100">Solar</p>
+          <p class="text-sm uppercase tracking-[0.32em] text-slate-300">Dashboard</p>
          
         </div>
       </article>
 
       <article class="rounded-3xl border border-white/10 bg-gradient-to-br from-white/12 via-white/6 to-white/0 px-6 py-4 shadow-[0_24px_60px_rgba(0,0,0,0.5)] backdrop-blur flex flex-col justify-center items-end text-right">
-        <p class="text-3xl font-semibold leading-tight tracking-tight tabular-nums">{formatTime(now)}</p>
-        <p class="text-sm text-slate-300 tracking-[0.08em]">{formatDate(now)}</p>
+        <p class="text-4xl font-semibold leading-tight tracking-tight tabular-nums">{formatTime(now)}</p>
+        <p class="text-base text-slate-300 tracking-[0.08em]">{formatDate(now)}</p>
       </article>
     </section>
 
     <section class="rounded-3xl border border-white/10 bg-gradient-to-br from-white/8 via-white/3 to-white/0 p-7 shadow-[0_26px_90px_rgba(0,0,0,0.6)] backdrop-blur">
 
       <div class="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[1fr_1.2fr_0.9fr]">
-        <div class="inverters-panel rounded-3xl border border-white/10 bg-slate-900/50 p-4 shadow-lg shadow-black/40">
+        <div class="inverters-panel rounded-3xl border border-white/10 bg-slate-900/50 p-5 shadow-lg shadow-black/40">
           <div class="mb-3 flex items-center justify-between">
             <p class="text-sm uppercase tracking-[0.22em] text-slate-400">Inverters</p>
           </div>
@@ -220,8 +220,8 @@
               </div>
             {:else}
               {#each inverters.slice(0, 16) as inverter}
-                <div class="rounded-full border border-white/10 bg-white/5 px-3 py-2 shadow-inner shadow-black/30 text-xs text-slate-100">
-                  <div class="flex items-center justify-center text-[11px] text-slate-50 font-semibold tracking-[0.12em]">
+                <div class="rounded-full border border-white/10 bg-white/5 px-3 py-2 shadow-inner shadow-black/30 text-base text-slate-100">
+                  <div class="flex items-center justify-center text-base text-slate-50 font-semibold tracking-[0.12em]">
                     {formatPower(inverter.lastReportWatts)}
                   </div>
                 </div>
@@ -239,7 +239,7 @@
                     <Sun class="h-5 w-5" aria-hidden="true" />
                   </span>
                   <div class="leading-tight">
-                    <p class="text-xl font-semibold">{formatEnergy(flows.producing)} kW</p>
+                    <p class="text-2xl font-semibold">{formatEnergy(flows.producing)} kW</p>
                     <p class="text-[11px] uppercase tracking-[0.24em] text-amber-100/80">Producing</p>
                   </div>
                 </div>
@@ -252,7 +252,7 @@
                   <Zap class="h-5 w-5" aria-hidden="true" />
                 </span>
                 <div class="leading-tight">
-                  <p class="text-xl font-semibold">{formatEnergy(flows.importing)} kW</p>
+                  <p class="text-2xl font-semibold">{formatEnergy(flows.importing)} kW</p>
                   <p class="text-[11px] uppercase tracking-[0.24em] text-sky-100/80">Importing</p>
                 </div>
               </div>
@@ -284,13 +284,13 @@
 
             <div class="flow-card w-52 rounded-2xl border border-emerald-300/25 bg-gradient-to-b from-emerald-500/16 to-emerald-500/0 px-5 py-4 text-center shadow-lg shadow-emerald-900/35">
               <div class="flex items-center gap-3">
-              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/15 border border-emerald-300/30 text-emerald-100">
-                <Zap class="h-5 w-5" aria-hidden="true" />
-              </span>
-              <div class="leading-tight text-left">
-                <p class="text-xl font-semibold">{formatEnergy(flows.exporting)} kW</p>
-                <p class="text-[11px] uppercase tracking-[0.24em] text-emerald-100/80">Exporting</p>
-              </div>
+                <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/15 border border-emerald-300/30 text-emerald-100">
+                  <Zap class="h-5 w-5" aria-hidden="true" />
+                </span>
+                <div class="leading-tight text-left">
+                  <p class="text-2xl font-semibold">{formatEnergy(flows.exporting)} kW</p>
+                  <p class="text-[11px] uppercase tracking-[0.24em] text-emerald-100/80">Exporting</p>
+                </div>
               </div>
             </div>
           </div>
@@ -298,15 +298,15 @@
 
         </div>
 
-        <div class="daily-panel rounded-3xl border border-white/10 bg-slate-900/50 p-5 shadow-lg shadow-black/40">
+        <div class="daily-panel rounded-3xl border border-white/10 bg-slate-900/50 p-6 shadow-lg shadow-black/40">
           <div class="mb-3 flex items-center justify-between">
-            <p class="text-sm uppercase tracking-[0.22em] text-slate-400">Daily</p>
+            <p class="text-sm uppercase tracking-[0.22em] text-slate-400">Daily Solar</p>
           </div>
           <div class="grid gap-3">
             {#each dailyItems as item}
-              <div class="flex items-center justify-between rounded-2xl border border-white/5 bg-white/5 px-4 py-3 shadow-inner shadow-black/30">
-                <span class="text-xs uppercase tracking-[0.2em] text-slate-400">{item.label}</span>
-                <span class="text-xl font-semibold text-slate-50">{item.value}</span>
+              <div class="flex items-center justify-between rounded-2xl border border-white/5 bg-white/5 px-5 py-3.5 shadow-inner shadow-black/30">
+                <span class="text-sm uppercase tracking-[0.22em] text-slate-300">{item.label}</span>
+                <span class="text-2xl font-semibold text-slate-50 tabular-nums">{item.value}</span>
               </div>
             {/each}
           </div>
