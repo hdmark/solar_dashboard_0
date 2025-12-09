@@ -131,7 +131,7 @@ export const load = (async ({ fetch }) => {
 		const data = await fetchJson<any>(weatherUrl);
 		if (!data) return null;
 
-		const temperature = toNumber(data.main?.temp, 37);
+		const temperature = Math.round(toNumber(data.main?.temp, 37));
 		const rain = toNumber(data.rain?.['1h'], 0);
 		const clouds = toNumber(data.clouds?.all, 0);
 		const windSpeed = toNumber(data.wind?.speed, 0);

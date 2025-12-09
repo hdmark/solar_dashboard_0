@@ -65,6 +65,8 @@
     if (value === undefined || value === null) return "--";
     return `${(value / 1000).toFixed(1)} kW`;
   };
+  const formatWind = (value: number) => `${value.toFixed(1)} mph`;
+  const formatRain = (value: number) => `${value.toFixed(0)}%`;
 
   const formatLastUpdated = (value: string) => {
     const parsed = Date.parse(value);
@@ -157,38 +159,54 @@
 </svelte:head>
 
 <div class="relative isolate min-h-screen w-full overflow-hidden bg-gradient-to-br from-[#0b1021] via-[#0f1a30] to-[#0a0f1f] text-slate-100">
-  <div class="pointer-events-none absolute inset-x-10 top-10 h-24 rounded-full bg-gradient-to-r from-sky-500/20 via-purple-500/15 to-amber-400/20 blur-3xl"></div>
+  <div class="pointer-events-none absolute inset-x-10 top-10 h-28 rounded-full bg-gradient-to-r from-sky-500/20 via-purple-500/15 to-amber-400/20 blur-3xl"></div>
   <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.05),transparent_35%)]"></div>
+  <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.38),transparent_60%)]"></div>
 
-  <main class="relative mx-auto flex max-w-[1280px] flex-col gap-6 px-6 py-6 sm:px-10">
+  <main class="relative mx-auto flex max-w-[1280px] flex-col gap-7 px-6 py-8 sm:px-10">
 
-    <section class="grid grid-cols-1 gap-4 md:grid-cols-2">
-      <article class="group rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-white/0 px-6 py-5 shadow-2xl shadow-black/50 backdrop-blur">
-        <div class="flex items-center gap-4">
-          <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-700/60 to-slate-900/80 border border-white/10 shadow-inner shadow-black/60">
+    <section class="grid grid-cols-1 gap-4 md:grid-cols-[0.85fr_1.3fr_0.85fr]">
+      <article class="group rounded-3xl border border-white/10 bg-gradient-to-br from-white/12 via-white/6 to-white/0 px-6 py-4 shadow-[0_24px_60px_rgba(0,0,0,0.5)] backdrop-blur">
+        <div class="flex items-center gap-3">
+          <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-700/60 to-slate-900/80 border border-white/10 shadow-inner shadow-black/60 animate-softpulse">
             <img
               src={iconUrl(weather.icon)}
               alt={weather.description}
-              class="h-12 w-12 drop-shadow-[0_5px_12px_rgba(0,0,0,0.35)]"
+              class="h-10 w-10 drop-shadow-[0_5px_12px_rgba(0,0,0,0.35)]"
               loading="lazy"
               decoding="async"
             />
           </div>
-          <div class="space-y-1">
-            <p class="text-4xl font-semibold leading-tight tracking-tight">{weather.temperature}°F</p>
-            <p class="text-sm text-slate-300">{weather.description}</p>
-            <p class="text-xs text-slate-400">Last Updated: {weather.lastUpdated}</p>
+          <div class="space-y-1 w-full">
+            <div class="flex items-center justify-between gap-4">
+              <div class="flex flex-col gap-0.5">
+                <p class="text-4xl font-semibold leading-tight tracking-tight tabular-nums drop-shadow-sm">{weather.temperature}°F</p>
+                <p class="text-sm text-slate-200">{weather.description}</p>
+              </div>
+              <div class="flex flex-col items-end gap-0.5 text-[11px] uppercase tracking-[0.18em] text-slate-300">
+                <p>Wind {formatWind(weather.wind)}</p>
+                <p>Rain {formatRain(weather.rain)}</p>
+              </div>
+            </div>
           </div>
         </div>
       </article>
 
-      <article class="rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-white/0 px-6 py-5 text-right shadow-2xl shadow-black/50 backdrop-blur">
-        <p class="text-4xl font-semibold leading-tight tracking-tight">{formatTime(now)}</p>
-        <p class="text-sm text-slate-300">{formatDate(now)}</p>
+      <article class="flex items-center justify-center rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-white/0 px-6 py-4 text-center shadow-[0_24px_60px_rgba(0,0,0,0.5)] backdrop-blur">
+        <div> 
+          <p class="text-2xl font-semibold tracking-tight text-slate-100">Solar</p>
+          <p class="text-xs uppercase tracking-[0.32em] text-slate-300">Dashboard</p>
+         
+        </div>
+      </article>
+
+      <article class="rounded-3xl border border-white/10 bg-gradient-to-br from-white/12 via-white/6 to-white/0 px-6 py-4 shadow-[0_24px_60px_rgba(0,0,0,0.5)] backdrop-blur flex flex-col justify-center items-end text-right">
+        <p class="text-3xl font-semibold leading-tight tracking-tight tabular-nums">{formatTime(now)}</p>
+        <p class="text-sm text-slate-300 tracking-[0.08em]">{formatDate(now)}</p>
       </article>
     </section>
 
-    <section class="rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 via-white/2 to-white/0 p-6 shadow-[0_20px_80px_rgba(0,0,0,0.55)] backdrop-blur">
+    <section class="rounded-3xl border border-white/10 bg-gradient-to-br from-white/8 via-white/3 to-white/0 p-7 shadow-[0_26px_90px_rgba(0,0,0,0.6)] backdrop-blur">
 
       <div class="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[1fr_1.2fr_0.9fr]">
         <div class="inverters-panel rounded-3xl border border-white/10 bg-slate-900/50 p-4 shadow-lg shadow-black/40">
@@ -202,8 +220,8 @@
               </div>
             {:else}
               {#each inverters.slice(0, 16) as inverter}
-                <div class="rounded-2xl border border-white/10 bg-white/5 px-3 py-2 shadow-inner shadow-black/30 text-xs text-slate-100">
-                  <div class="flex items-center justify-center text-[11px] text-slate-50 font-semibold">
+                <div class="rounded-full border border-white/10 bg-white/5 px-3 py-2 shadow-inner shadow-black/30 text-xs text-slate-100">
+                  <div class="flex items-center justify-center text-[11px] text-slate-50 font-semibold tracking-[0.12em]">
                     {formatPower(inverter.lastReportWatts)}
                   </div>
                 </div>
@@ -212,9 +230,9 @@
           </div>
         </div>
 
-        <div class="live-panel flex flex-col items-center gap-4">
-          <div class="flex flex-wrap justify-center gap-3">
-            <div class="flow-card w-48 rounded-2xl border border-amber-300/20 bg-gradient-to-b from-amber-500/10 to-amber-500/0 px-4 py-3 shadow-lg shadow-amber-900/30">
+        <div class="live-panel flex flex-col items-center gap-5">
+          <div class="flex w-full max-w-xl flex-nowrap justify-center gap-4">
+            <div class="flow-card w-52 rounded-2xl border border-amber-300/25 bg-gradient-to-b from-amber-500/16 via-amber-500/6 to-amber-500/0 px-5 py-4 shadow-lg shadow-amber-900/40">
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
                   <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/15 border border-amber-300/30 text-amber-200">
@@ -222,20 +240,20 @@
                   </span>
                   <div class="leading-tight">
                     <p class="text-xl font-semibold">{formatEnergy(flows.producing)} kW</p>
-                    <p class="text-[11px] uppercase tracking-[0.2em] text-amber-100/80">Producing</p>
+                    <p class="text-[11px] uppercase tracking-[0.24em] text-amber-100/80">Producing</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="flow-card w-48 rounded-2xl border border-sky-300/25 bg-gradient-to-b from-sky-500/15 to-sky-500/0 px-4 py-3 shadow-lg shadow-sky-900/30">
+            <div class="flow-card w-52 rounded-2xl border border-sky-300/25 bg-gradient-to-b from-sky-500/16 to-sky-500/0 px-5 py-4 shadow-lg shadow-sky-900/35">
               <div class="flex items-center gap-3">
                 <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-sky-500/15 border border-sky-300/30 text-sky-100">
                   <Zap class="h-5 w-5" aria-hidden="true" />
                 </span>
                 <div class="leading-tight">
                   <p class="text-xl font-semibold">{formatEnergy(flows.importing)} kW</p>
-                  <p class="text-[11px] uppercase tracking-[0.2em] text-sky-100/80">Importing</p>
+                  <p class="text-[11px] uppercase tracking-[0.24em] text-sky-100/80">Importing</p>
                 </div>
               </div>
             </div>
@@ -247,14 +265,14 @@
               <div class="h-10 w-[2px] bg-gradient-to-b from-cyan-400/80 via-cyan-300/40 to-transparent"></div>
             </div>
 
-            <div class="w-44 rounded-2xl border border-violet-300/25 bg-gradient-to-b from-violet-500/12 to-violet-500/0 px-4 py-3 text-center shadow-lg shadow-black/40">
+            <div class="w-44 rounded-2xl border border-violet-300/25 bg-gradient-to-b from-violet-500/14 to-violet-500/0 px-4 py-3 text-center shadow-lg shadow-black/45">
               <div class="flex items-center gap-3">
                 <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-500/15 border border-violet-300/30 text-rose-200">
                   <Home class="h-5 w-5" aria-hidden="true" />
                 </span>
                 <div class="leading-tight">
                   <p class="text-xl font-semibold">{formatEnergy(flows.consuming)} kW</p>
-                  <p class="text-[11px] uppercase tracking-[0.2em] text-amber-100/80">Consuming</p>
+                  <p class="text-[11px] uppercase tracking-[0.22em] text-amber-100/80">Consuming</p>
                 </div>
                 </div>
             </div>
@@ -264,14 +282,14 @@
               <ArrowDown class="h-4 w-4" aria-hidden="true" />
             </div>
 
-            <div class="flow-card w-48 rounded-2xl border border-emerald-300/25 bg-gradient-to-b from-emerald-500/12 to-emerald-500/0 px-4 py-3 text-center shadow-lg shadow-emerald-900/30">
+            <div class="flow-card w-52 rounded-2xl border border-emerald-300/25 bg-gradient-to-b from-emerald-500/16 to-emerald-500/0 px-5 py-4 text-center shadow-lg shadow-emerald-900/35">
               <div class="flex items-center gap-3">
-              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/15 border border-amber-300/30 text-amber-200">
+              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/15 border border-emerald-300/30 text-emerald-100">
                 <Zap class="h-5 w-5" aria-hidden="true" />
               </span>
-              <div class="leading-tight">
+              <div class="leading-tight text-left">
                 <p class="text-xl font-semibold">{formatEnergy(flows.exporting)} kW</p>
-                <p class="text-[11px] uppercase tracking-[0.2em] text-amber-100/80">Exporting</p>
+                <p class="text-[11px] uppercase tracking-[0.24em] text-emerald-100/80">Exporting</p>
               </div>
               </div>
             </div>
@@ -298,12 +316,25 @@
   </main>
 
   <button
-    class="fixed bottom-6 right-6 flex h-12 items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 text-sm font-semibold text-slate-50 shadow-lg shadow-black/40 backdrop-blur transition hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/15 active:translate-y-0 disabled:opacity-60"
+    class="fixed bottom-6 right-6 flex h-14 w-14 items-center justify-center rounded-full border border-white/15 bg-white/10 text-slate-50 shadow-[0_14px_40px_rgba(0,0,0,0.5)] backdrop-blur transition hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/16 active:translate-y-0 disabled:opacity-60"
     on:click={refresh}
     disabled={refreshing}
     aria-live="polite"
+    aria-label="Refresh data"
   >
     <RefreshCw class={`h-5 w-5 ${refreshing ? "animate-spin" : ""}`} aria-hidden="true" />
-    {refreshing ? "Refreshing..." : "Refresh data"}
   </button>
 </div>
+
+<style>
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+  @keyframes softpulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.02); opacity: 0.9; }
+  }
+  .animate-softpulse {
+    animation: softpulse 4s ease-in-out infinite;
+  }
+</style>
