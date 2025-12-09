@@ -163,7 +163,7 @@
   <main class="relative mx-auto flex max-w-[1280px] flex-col gap-6 px-6 py-6 sm:px-10">
 
     <section class="grid grid-cols-1 gap-4 md:grid-cols-2">
-      <article class="group rounded-3xl border border-white/10 bg-white/5 px-6 py-5 shadow-2xl shadow-black/50 backdrop-blur">
+      <article class="group rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-white/0 px-6 py-5 shadow-2xl shadow-black/50 backdrop-blur">
         <div class="flex items-center gap-4">
           <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-700/60 to-slate-900/80 border border-white/10 shadow-inner shadow-black/60">
             <img
@@ -182,13 +182,13 @@
         </div>
       </article>
 
-      <article class="rounded-3xl border border-white/10 bg-white/5 px-6 py-5 text-right shadow-2xl shadow-black/50 backdrop-blur">
+      <article class="rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-white/0 px-6 py-5 text-right shadow-2xl shadow-black/50 backdrop-blur">
         <p class="text-4xl font-semibold leading-tight tracking-tight">{formatTime(now)}</p>
         <p class="text-sm text-slate-300">{formatDate(now)}</p>
       </article>
     </section>
 
-    <section class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-[0_20px_80px_rgba(0,0,0,0.55)] backdrop-blur">
+    <section class="rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 via-white/2 to-white/0 p-6 shadow-[0_20px_80px_rgba(0,0,0,0.55)] backdrop-blur">
 
       <div class="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[1fr_1.2fr_0.9fr]">
         <div class="inverters-panel rounded-3xl border border-white/10 bg-slate-900/50 p-4 shadow-lg shadow-black/40">
@@ -304,6 +304,6 @@
     aria-live="polite"
   >
     <RefreshCw class={`h-5 w-5 ${refreshing ? "animate-spin" : ""}`} aria-hidden="true" />
-
+    {refreshing ? "Refreshing..." : "Refresh data"}
   </button>
 </div>
