@@ -248,3 +248,5 @@ export const load = (async ({ fetch }) => {
 		lastUpdated: fetchedAt
 	};
 }) satisfies PageServerLoad;
+
+export const prerender = false;
