@@ -158,12 +158,12 @@
   <title>Solar Dashboard</title>
 </svelte:head>
 
-<div class="relative isolate min-h-screen w-full overflow-hidden bg-gradient-to-br from-[#0b1021] via-[#0f1a30] to-[#0a0f1f] text-slate-100">
+<div class="relative isolate min-h-[calc(100vh-1rem)] w-full overflow-hidden bg-gradient-to-br from-[#0b1021] via-[#0f1a30] to-[#0a0f1f] text-slate-100">
   <div class="pointer-events-none absolute inset-x-10 top-10 h-28 rounded-full bg-gradient-to-r from-sky-500/20 via-purple-500/15 to-amber-400/20 blur-3xl"></div>
   <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.05),transparent_35%)]"></div>
   <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.38),transparent_60%)]"></div>
 
-  <main class="relative mx-auto flex max-w-[1280px] flex-col gap-7 px-6 py-8 sm:px-10">
+  <main class="relative mx-auto flex max-w-[1280px] max-h-[720px] flex-col gap-7 px-6 py-5 sm:px-10">
 
     <section class="grid grid-cols-1 gap-4 md:grid-cols-[0.85fr_1.3fr_0.85fr]">
       <article class="group rounded-3xl border border-white/10 bg-gradient-to-br from-white/12 via-white/6 to-white/0 px-6 py-4 shadow-[0_24px_60px_rgba(0,0,0,0.5)] backdrop-blur">
